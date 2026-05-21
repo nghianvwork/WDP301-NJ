@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 
 const Header = () => {
+  const [activeLink, setActiveLink] = useState('Trang chủ');
+
+  const navLinks = ['Trang chủ', 'Chi nhánh', 'Phòng', 'Ưu đãi', 'Liên hệ'];
+
   return (
     <header className="header-container">
       <div className="header-logo-section">
@@ -10,11 +14,19 @@ const Header = () => {
       </div>
       
       <nav className="header-nav">
-        <a href="#" className="header-nav-link active">Trang chủ</a>
-        <a href="#" className="header-nav-link">Chi nhánh</a>
-        <a href="#" className="header-nav-link">Phòng</a>
-        <a href="#" className="header-nav-link">Ưu đãi</a>
-        <a href="#" className="header-nav-link">Liên hệ</a>
+        {navLinks.map((link) => (
+          <a
+            key={link}
+            href="#"
+            className={`header-nav-link ${activeLink === link ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveLink(link);
+            }}
+          >
+            {link}
+          </a>
+        ))}
       </nav>
       
       <div className="header-actions">
